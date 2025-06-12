@@ -1,0 +1,382 @@
+openapi: 2.0
+info:
+  title: API - Jhonathan
+  description: "API para gerenciar usuários, produtos, categorias e pedidos."
+  version: 1.0.0
+servers:
+  - url: "http://localhost:3000"
+schemas:
+  - http
+  - https
+tags:
+  - name: Users
+    description: Operações relacionadas a usuários
+  - name: Categorys
+    description: Operações relacionadas a categorias
+  - name: Products
+    description: Operações relacionadas a produtos
+  - name: Orders
+    description: Operações relacionadas a pedidos
+
+paths:
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Lista todos os usuários
+      operationId: getUsers
+      responses:
+        "200":
+          description: Lista de usuários
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "400":
+          description: Requisição inválida
+        "404":
+          description: Não encontrado
+        "500":
+          description: Servidor não disponível
+    post:
+      tags:
+        - Users
+      summary: Cria um novo usuário
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  "/users/{id}":
+    get:
+      tags:
+        - Users
+      summary: Busca um usuário por ID
+      operationId: getUserById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: Usuário não encontrado
+    put:
+      tags:
+        - Users
+      summary: Atualiza um usuário por ID
+      operationId: updateUser
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Usuário atualizado
+    delete:
+      tags:
+        - Users
+      summary: Deleta um usuário por ID
+      operationId: deleteUser
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Usuário deletado com sucesso
+
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Lista
+      operationId: getProduct
+      responses:
+        "200":
+          description: Lista de produtos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "400":
+          description: Requisição inválida
+        "404":
+          description: Não encontrado
+        "500":
+          description: Servidor não disponível
+    post:
+      tags:
+        - Products
+      summary: Cria um novo produto
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+  "/products/{id}":
+    get:
+      tags:
+        - Users
+      summary: Busca um produto por ID
+      operationId: getUserById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Produto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Produto não encontrado
+    put:
+      tags:
+        - Products
+      summary: Atualiza um produto por ID
+      operationId: updateProduct
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: Produto atualizado
+    delete:
+      tags:
+        - Products
+      summary: Deleta um produto por ID
+      operationId: deleteProduct
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Produto deletado com sucesso
+
+  /categorys:
+    get:
+      tags:
+        - Category
+      summary: Lista todos as categorias
+      operationId: getCategory
+      responses:
+        "200":
+          description: Lista de categorias
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+        "400":
+          description: Requisição inválida
+        "404":
+          description: Não encontrado
+        "500":
+          description: Servidor não disponível
+    post:
+      tags:
+        - Users
+      summary: Cria uma nova categoria
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "201":
+          description: categoria criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+  "/categorys/{id}":
+    get:
+      tags:
+        - Categorys
+      summary: Busca uma categoria por ID
+      operationId: getUserById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: categoria encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "404":
+          description: categoria não encontrada
+    put:
+      tags:
+        - Categorys
+      summary: Atualiza uma categoria por ID
+      operationId: updateCategory
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "200":
+          description: categoria atualizada
+    delete:
+      tags:
+        - Categorys
+      summary: Deleta uma categoria por ID
+      operationId: deleteCategory
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: categoria deletada com sucesso
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - nome
+        - email
+        - senha
+      properties:
+        id:
+          type: integer
+          format: int32
+        nome:
+          type: string
+        email:
+          type: string
+          format: email
+        senha:
+          type: string
+          format: password
+
+  Product:
+    type: object
+    required:
+      - name
+      - price
+      - idCategory
+    properties:
+      id:
+        type: integer
+        format: int32
+      name:
+        type: string
+      price:
+        type: float
+        format: email
+      idCategory:
+        type: integer
+        format: int32
+
+  Order:
+    type: object
+    required:
+      - idIdUser
+    properties:
+      id:
+        type: integer
+        format: int32
+      idUser:
+        type: integer
+        format: int32
+
+OrderItem:
+  type: object
+  required:
+    - idOrder
+    - idProduct
+  properties:
+    id:
+      type: integer
+      format: int32
+    idOrder:
+      type: integer
+      format: int32
+    idProduct:
+      type: integer
+      format: int32
+
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: "Digite o token no formato: Bearer <token>"
+security:
+  - BearerAuth: []
