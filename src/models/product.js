@@ -1,4 +1,5 @@
 const database = require('../config/database');
+const Category = require('./category'); 
 
 const Product = database.define('products', {
     id: {
@@ -13,8 +14,16 @@ const Product = database.define('products', {
         type: database.Sequelize.FLOAT
     },
     idCategory: {
-        type: database.Sequelize.INTEGER
-    },
+        type: database.Sequelize.INTEGER,
+        references: {
+            model: Category,
+            key: 'id'
+        },
+    }});
+
+Product.belongsTo(Category, {
+    foreignKey: 'idCategory',
+    as: 'category'
 });
 
 module.exports = Product;

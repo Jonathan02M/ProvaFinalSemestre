@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('bd_restfull', 'root', '', {
+const sequelize = new Sequelize('react_api', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
 });

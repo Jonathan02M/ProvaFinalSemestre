@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Category = require('../models/category');
 
 class ProductController {
 
@@ -10,7 +11,7 @@ class ProductController {
         ) {
             throw new Error('Nome, preço e categoria são obrigatórios!');
         }
-        const product = await Product.create({ name, price, idCategory});
+        const product = await Product.create({ name, price, idCategory });
 
         return product;
     }
@@ -57,8 +58,15 @@ class ProductController {
         product.destroy();
     }
 
+
     async listProduct() {
-        return Product.findAll();
+        return Product.findAll({
+            include: {
+                model: Category,
+                as: 'category',
+                attributes: ['id', 'name']
+            }
+        });
     }
 }
 
